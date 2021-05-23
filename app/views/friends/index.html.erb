@@ -1,0 +1,43 @@
+
+
+<% if user_signed_in? %>
+  <h1>Friends</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Instagram</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @friends.each do |friend| %>
+            <% if friend.user == current_user%>
+              <tr>
+                <td><%= link_to friend.first_name+ ' ' + friend.last_name, friend %></td>
+                <td><%= friend.email %></td>
+                <td><%= friend.phone %></td>
+                <td><%= friend.instagram %></td>
+                <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' },
+                  class:"btn btn-danger"%></td>
+                
+              </tr>
+            <% end%>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'Add New ', new_friend_path, class:"btn btn-primary" %>
+
+<% else%>
+<img src="https://i.pinimg.com/originals/91/c5/e0/91c5e026b5b1d847772e5225531aaa0a.jpg" class="img-fluid" alt="Responsive image">
+<h1 class="title">A place to save your friend</h1>
+<img src="https://i.pinimg.com/originals/9e/c3/6f/9ec36fd83fe98dc75a1038e14569e9d2.jpg" class="img-fluid" alt="Responsive image">
+
+<% end%>
